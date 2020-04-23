@@ -47,7 +47,7 @@ public class MarkovChain {
     /**
      * Chooses random state as a start state.
      */
-    public void resetState() {
+    void resetState() {
         currentState = random.nextInt(26);
     }
 
@@ -56,7 +56,7 @@ public class MarkovChain {
      *
      * @return character that is represented by chosen next state.
      */
-    public char next() {
+    char next() {
         char result = (char)(currentState + 'a');
 
         int sum = random.nextInt(totalTransitions[currentState] + 1);
