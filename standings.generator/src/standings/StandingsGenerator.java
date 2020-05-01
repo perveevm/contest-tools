@@ -26,9 +26,11 @@ public class StandingsGenerator {
         int score = 0;
 
         for (final ParticipantProblemInfo info : problems) {
-            if (info.isSolved) {
-                score++;
-            } else if (config.standingsType == ContestType.IOI) {
+            if (config.standingsType == ContestType.ICPC) {
+                if (info.isSolved) {
+                    score++;
+                }
+            } else {
                 score += info.score;
             }
         }
