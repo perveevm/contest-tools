@@ -290,6 +290,7 @@ public class StandingsGenerator {
 
             if (score != oldScore) {
                 curId++;
+                oldScore = score;
             }
 
             idPlace.put(sortedStandings.get(i).getKey(), curId);
