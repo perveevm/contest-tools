@@ -310,6 +310,8 @@ public class StandingsGenerator {
                         }
                         cur.append(participantProblemInfo.score);
                         score += participantProblemInfo.score;
+                    } else {
+                        cur.append("<td>")
                     }
                 } else {
                     if (participantProblemInfo.isSolved) {
@@ -337,6 +339,8 @@ public class StandingsGenerator {
                         int m = curPenalty % 60;
 
                         cur.append(String.format("<div>%d:%02d</div>", h, m));
+                    } else {
+                        cur.append("<td>")
                     }
                 }
 

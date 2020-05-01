@@ -11,7 +11,8 @@ table.standings {
 }
 
 .standings .ok {
-    background-color: lawngreen;
+    /*background-color: lawngreen;*/
+    background-color: greenyellow;
 }
 
 .standings .rj {
