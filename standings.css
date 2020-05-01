@@ -8,15 +8,18 @@ table.standings {
 
 .standings th, .standings td {
     vertical-align: middle;
+    border: solid black 1px;
 }
 
 .standings .ok {
     /*background-color: lawngreen;*/
     background-color: rgb(208, 240, 208);
+    text-align: center;
 }
 
 .standings .rj {
     background-color: rgb(247, 94, 99);
+    text-align: center;
 }
 
 .standings .r00 {
@@ -24,11 +27,11 @@ table.standings {
 }
 
 .standings .r01 {
-    background-color: rgb(246, 246, 246);
+    background-color: rgb(236, 236, 236);
 }
 
 .standings .r10 {
-    background-color: lightblue;
+    background-color: rgb(234, 255, 255);
 }
 
 .standings .r11 {
