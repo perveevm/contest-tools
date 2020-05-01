@@ -67,7 +67,7 @@ public class HttpStandingsHandler implements HttpHandler {
 
         Path submits;
         try {
-            submits = Path.of(String.format("%s/%06d/var/dir/external.xml", judgesDir, config.contestID));
+            submits = Path.of(String.format("%s/%06d/var/status/dir/external.xml", judgesDir, config.contestID));
         } catch (InvalidPathException e) {
             exchange.sendResponseHeaders(501, 0);
             exchange.close();
