@@ -10,10 +10,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class StandingsConfig {
     public String standingsTitle = "Standings";
@@ -23,7 +20,7 @@ public class StandingsConfig {
 
     public int contestID = 1;
 
-    public Set<String> needLastAC = Collections.emptySet();
+    public Set<String> needLastAC = new HashSet<>();
 
     // TODO: use this parameters
     public List<Integer> contestsID = Collections.emptyList();
