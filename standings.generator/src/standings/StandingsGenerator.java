@@ -6,7 +6,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import contest.Problem;
-import contest.ProblemInfo;
+import contest.ParticipantProblemInfo;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -21,6 +21,35 @@ public class StandingsGenerator {
 
     private String bodyUpData = "";
     private String bodyDownData = "";
+
+    private int calculateScore(final List<ParticipantProblemInfo> problems, final StandingsConfig config) {
+        int score = 0;
+
+        for (final ParticipantProblemInfo info : problems) {
+            if (info.isSolved) {
+                score++;
+            } else if (config.standingsType == ContestType.IOI) {
+                score += info.score;
+            }
+        }
+
+        return score;
+    }
+
+    private int calculatePenalty(final List<ParticipantProblemInfo> problems, final StandingsConfig config) {
+        if (config.standingsType == ContestType.IOI) {
+            return 0;
+        }
+
+        int penalty = 0;
+        for (final ParticipantProblemInfo info : problems) {
+            if (info.isSolved) {
+                penalty += (info.lastRunTime + 59) / 60 + 20 * info.runsCount;
+            }
+        }
+
+        return penalty;
+    }
 
     public String generate(final File inputXMLFile, final StandingsConfig config) throws ParserConfigurationException, SAXException, IOException {
         StringBuilder html = new StringBuilder();
@@ -61,12 +90,12 @@ public class StandingsGenerator {
             ));
         }
 
-        Map<Integer, List<ProblemInfo>> standings = new HashMap<>();
+        Map<Integer, List<ParticipantProblemInfo>> standings = new HashMap<>();
         for (final Integer userID : users.keySet()) {
             standings.put(userID, new ArrayList<>());
 
             for (int i = 0; i < problems.size(); i++) {
-                standings.get(userID).add(new ProblemInfo());
+                standings.get(userID).add(new ParticipantProblemInfo());
             }
         }
 
@@ -157,14 +186,14 @@ public class StandingsGenerator {
 
         html.append("</tr>\n");
 
-        Comparator<List<ProblemInfo>> comparator = (list1, list2) -> {
+        Comparator<List<ParticipantProblemInfo>> comparator = (list1, list2) -> {
             if (config.standingsType == ContestType.IOI) {
                 int score1 = 0, score2 = 0;
 
-                for (final ProblemInfo info : list1) {
+                for (final ParticipantProblemInfo info : list1) {
                     score1 += info.score;
                 }
-                for (final ProblemInfo info : list2) {
+                for (final ParticipantProblemInfo info : list2) {
                     score2 += info.score;
                 }
 
@@ -173,7 +202,7 @@ public class StandingsGenerator {
                 int solved1 = 0, solved2 = 0;
                 int penalty1 = 0, penalty2 = 0;
 
-                for (final ProblemInfo info : list1) {
+                for (final ParticipantProblemInfo info : list1) {
                     if (!info.isSolved) {
                         continue;
                     }
@@ -181,7 +210,7 @@ public class StandingsGenerator {
                     solved1++;
                     penalty1 += (info.lastRunTime + 59) / 60 + 20 * info.runsCount;
                 }
-                for (final ProblemInfo info : list2) {
+                for (final ParticipantProblemInfo info : list2) {
                     if (!info.isSolved) {
                         continue;
                     }
@@ -198,7 +227,7 @@ public class StandingsGenerator {
             }
         };
 
-        Comparator<Map.Entry<Integer, List<ProblemInfo>>> fullComparator = (entry1, entry2) -> {
+        Comparator<Map.Entry<Integer, List<ParticipantProblemInfo>>> fullComparator = (entry1, entry2) -> {
             if (comparator.compare(entry1.getValue(), entry2.getValue()) == 0) {
                 return users.get(entry1.getKey()).compareTo(users.get(entry2.getKey()));
             } else {
@@ -206,41 +235,74 @@ public class StandingsGenerator {
             }
         };
 
-        List<Map.Entry<Integer, List<ProblemInfo>>> sortedStandings = standings.entrySet().stream()
+        List<Map.Entry<Integer, List<ParticipantProblemInfo>>> sortedStandings = standings.entrySet().stream()
                 .sorted(fullComparator)
                 .collect(Collectors.toList());
 
-        for (Map.Entry<Integer, List<ProblemInfo>> participant : sortedStandings) {
+        Map<Integer, Integer> lowerPlace = new HashMap<>();
+        Map<Integer, Integer> upperPlace = new HashMap<>();
+
+        int l = 0;
+        lowerPlace.put(sortedStandings.get(0).getKey(), 1);
+
+        int oldScore = calculateScore(sortedStandings.get(0).getValue(), config);
+        int oldPenalty = calculatePenalty(sortedStandings.get(0).getValue(), config);
+
+        for (int r = 1; r < sortedStandings.size(); r++) {
+            int score = calculateScore(sortedStandings.get(r).getValue(), config);
+            int penalty = calculatePenalty(sortedStandings.get(r).getValue(), config);
+
+            if (score != oldScore || penalty != oldPenalty) {
+                int lower = l + 1;
+                int upper = r;
+
+                for (int i = l; i < r; i++) {
+                    lowerPlace.put(sortedStandings.get(i).getKey(), lower);
+                    upperPlace.put(sortedStandings.get(i).getKey(), upper);
+                }
+
+                l = r;
+                oldScore = score;
+                oldPenalty = penalty;
+            }
+        }
+
+        for (int i = l; i < sortedStandings.size(); i++) {
+            lowerPlace.put(sortedStandings.get(i).getKey(), l + 1);
+            upperPlace.put(sortedStandings.get(i).getKey(), sortedStandings.size());
+        }
+
+        for (Map.Entry<Integer, List<ParticipantProblemInfo>> participant : sortedStandings) {
             StringBuilder cur = new StringBuilder();
 
             cur.append("<tr>\n");
 
-            cur.append("<td>???</td>\n");
+            cur.append(String.format("<td>%d-%d</td>\n", lowerPlace.get(participant.getKey()), upperPlace.get(participant.getKey())));
             cur.append(String.format("<td>%s</td>", users.get(participant.getKey()))).append("\n");
 
             int score = 0;
             int penalty = 0;
 
-            for (ProblemInfo problemInfo : participant.getValue()) {
+            for (ParticipantProblemInfo participantProblemInfo : participant.getValue()) {
                 cur.append("<td>");
 
                 if (config.standingsType == ContestType.IOI) {
-                    if (problemInfo.isSolved || problemInfo.runsCount != 0) {
-                        cur.append(problemInfo.score);
-                        score += problemInfo.score;
+                    if (participantProblemInfo.isSolved || participantProblemInfo.runsCount != 0) {
+                        cur.append(participantProblemInfo.score);
+                        score += participantProblemInfo.score;
                     }
                 } else {
-                    if (problemInfo.isSolved) {
+                    if (participantProblemInfo.isSolved) {
                         cur.append("+");
 
-                        if (problemInfo.runsCount != 0) {
-                            cur.append(problemInfo.runsCount);
+                        if (participantProblemInfo.runsCount != 0) {
+                            cur.append(participantProblemInfo.runsCount);
                         }
 
                         score++;
-                        penalty += (problemInfo.lastRunTime + 59) / 60 + 20 * problemInfo.runsCount;
-                    } else if (problemInfo.runsCount != 0) {
-                        cur.append("-").append(problemInfo.runsCount);
+                        penalty += (participantProblemInfo.lastRunTime + 59) / 60 + 20 * participantProblemInfo.runsCount;
+                    } else if (participantProblemInfo.runsCount != 0) {
+                        cur.append("-").append(participantProblemInfo.runsCount);
                     }
                 }
 

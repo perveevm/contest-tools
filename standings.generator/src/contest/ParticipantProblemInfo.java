@@ -1,6 +1,6 @@
 package contest;
 
-public class ProblemInfo {
+public class ParticipantProblemInfo {
     public boolean isSolved = false;
 
     public int lastRunTime = 0;
