@@ -35,11 +35,7 @@ public class StandingsGenerator {
 
     private String bodyUpData =
             "<div id=\"main-cont\"><div id=\"container\">\n" +
-            "    <div id=\"header\">\n" +
-            "        <div id=\"logo\"><img src='./ejudge/logo3.png' alt=\"logo\"/></div>\n" +
-            "        <h1>Центр Стратегия – Ejudge</h1>\n" +
-            "    </div>\n" +
-            "    <div id=\"menuContestSelector\"></div>" +
+            "<div id=\"menuContestSelector\"></div>" +
             "<div align=\"center\"><h3>%s</h3></div>";
     private String bodyDownData = "<div id=\"footerCopyright\"></div></div></div>";
 
