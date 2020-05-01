@@ -20,8 +20,6 @@ public class StandingsGenerator {
     private String headData =
             "<meta http-equiv=\"Content-type\" content='text/html; charset=utf-8' />" +
             "<link href=\"../standings.css\" rel=\"stylesheet\" type=\"text/css\" />" +
-            "<link rel=\"stylesheet\" href=\"../ejudge/unpriv.css\" type=\"text/css\"/>\n" +
-            "<link rel=\"stylesheet\" href=\"../ejudge/priv.css\" type=\"text/css\"/>\n" +
             "<script src=\"../ejudge/jquery.min.js\"></script>\n" +
             "    <script>\n" +
             "        $(function () {\n" +
@@ -32,7 +30,7 @@ public class StandingsGenerator {
 
     private String bodyUpData =
 //            "<div id=\"menuContestSelector\">" +
-            "<h3>%s</h3>";
+            "<div align=\"center\"><h3>%s</h3></div>";
     private String bodyDownData = "<div id=\"footerCopyright\"></div>";
 
     private int calculateScore(final List<ParticipantProblemInfo> problems, final StandingsConfig config) {

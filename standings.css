@@ -42,3 +42,13 @@ table.standings {
 .standings .r11 {
     background-color: rgb(224, 244, 255);
 }
+
+.ejudge_copyright {
+    font-size: 12px;
+    margin: 3px 0px;
+}
+
+p.ejudge_copyright {
+    font-family: "Verdana","Arial";
+    font-size: 10px;
+}
