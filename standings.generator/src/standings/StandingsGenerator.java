@@ -51,6 +51,7 @@ public class StandingsGenerator {
         for (int i = 0; i < userNodes.getLength(); i++) {
             Element user = (Element) userNodes.item(i);
             users.put(Integer.parseInt(user.getAttribute("id")), user.getAttribute("name"));
+            System.out.println(user.getAttribute("name"));
         }
 
         for (int i = 0; i < problemNodes.getLength(); i++) {
@@ -59,6 +60,7 @@ public class StandingsGenerator {
                     problem.getAttribute("short_name"),
                     problem.getAttribute("long_name")
             ));
+            System.out.println(problem.getAttribute("long_name"));
         }
 
         Map<Integer, List<ProblemInfo>> standings = new HashMap<>();
@@ -156,8 +158,6 @@ public class StandingsGenerator {
         }
 
         html.append("</tr>\n");
-
-        System.out.println(html);
 
         Comparator<List<ProblemInfo>> comparator = (list1, list2) -> {
             if (config.standingsType == ContestType.IOI) {
