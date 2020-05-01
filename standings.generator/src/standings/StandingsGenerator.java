@@ -254,7 +254,6 @@ public class StandingsGenerator {
         int l = 0;
         int curId = 0;
         lowerPlace.put(sortedStandings.get(0).getKey(), 1);
-        idPlace.put(sortedStandings.get(0).getKey(), curId);
 
         int oldScore = calculateScore(sortedStandings.get(0).getValue(), config);
         int oldPenalty = calculatePenalty(sortedStandings.get(0).getValue(), config);
@@ -270,10 +269,8 @@ public class StandingsGenerator {
                 for (int i = l; i < r; i++) {
                     lowerPlace.put(sortedStandings.get(i).getKey(), lower);
                     upperPlace.put(sortedStandings.get(i).getKey(), upper);
-                    idPlace.put(sortedStandings.get(i).getKey(), curId);
                 }
 
-                curId++;
                 l = r;
                 oldScore = score;
                 oldPenalty = penalty;
@@ -283,6 +280,18 @@ public class StandingsGenerator {
         for (int i = l; i < sortedStandings.size(); i++) {
             lowerPlace.put(sortedStandings.get(i).getKey(), l + 1);
             upperPlace.put(sortedStandings.get(i).getKey(), sortedStandings.size());
+        }
+
+        oldScore = calculateScore(sortedStandings.get(0).getValue(), config);
+        idPlace.put(sortedStandings.get(0).getKey(), curId);
+
+        for (int i = 1; i < sortedStandings.size(); i++) {
+            int score = calculateScore(sortedStandings.get(i).getValue(), config);
+
+            if (score != oldScore) {
+                curId++;
+            }
+
             idPlace.put(sortedStandings.get(i).getKey(), curId);
         }
 
