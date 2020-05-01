@@ -299,15 +299,21 @@ public class StandingsGenerator {
             int penalty = 0;
 
             for (ParticipantProblemInfo participantProblemInfo : participant.getValue()) {
-                cur.append("<td>");
+//                cur.append("<td>");
 
                 if (config.standingsType == ContestType.IOI) {
                     if (participantProblemInfo.isSolved || participantProblemInfo.runsCount != 0) {
+                        if (participantProblemInfo.isSolved) {
+                            cur.append("<td class=\"ok\">");
+                        } else {
+                            cur.append("<td class=\"rj\">");
+                        }
                         cur.append(participantProblemInfo.score);
                         score += participantProblemInfo.score;
                     }
                 } else {
                     if (participantProblemInfo.isSolved) {
+                        cur.append("<td class=\"ok\">");
                         cur.append("+");
 
                         if (participantProblemInfo.runsCount != 0) {
@@ -323,6 +329,7 @@ public class StandingsGenerator {
 
                         cur.append(String.format("<div>%d:%02d</div>", h, m));
                     } else if (participantProblemInfo.runsCount != 0) {
+                        cur.append("<td class=\"rj\">");
                         cur.append("-").append(participantProblemInfo.runsCount);
 
                         int curPenalty = (participantProblemInfo.lastRunTime) / 60 + 20 * participantProblemInfo.runsCount;

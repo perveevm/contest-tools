@@ -10,10 +10,10 @@ table.standings {
     vertical-align: middle;
 }
 
-.standings > thead {
-    border-bottom: solid 0.15ex silver;
+.standings .ok {
+    background-color: lawngreen;
 }
 
-.standings > tfoot {
-    border-top: solid 0.15ex silver;
+.standings .rj {
+    background-color: indianred;
 }
