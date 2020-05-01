@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_ejudge.tools.spreadsheets.generator" default="compile.module.ejudge.tools.spreadsheets.generator">
+  <dirname property="module.ejudge.tools.spreadsheets.generator.basedir" file="${ant.file.module_ejudge.tools.spreadsheets.generator}"/>
+  
+  <property name="module.jdk.home.ejudge.tools.spreadsheets.generator" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.ejudge.tools.spreadsheets.generator" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.ejudge.tools.spreadsheets.generator" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.ejudge.tools.spreadsheets.generator" value="-encoding UTF-8 -source 11 -target 11 ${compiler.args}"/>
+  
+  <property name="ejudge.tools.spreadsheets.generator.output.dir" value="${module.ejudge.tools.spreadsheets.generator.basedir}/../out/production/ejudge.tools.spreadsheets.generator"/>
+  <property name="ejudge.tools.spreadsheets.generator.testoutput.dir" value="${module.ejudge.tools.spreadsheets.generator.basedir}/../out/test/ejudge.tools.spreadsheets.generator"/>
+  
+  <path id="ejudge.tools.spreadsheets.generator.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="ejudge.tools.spreadsheets.generator.module.production.classpath">
+    <path refid="${module.jdk.classpath.ejudge.tools.spreadsheets.generator}"/>
+    <path refid="library.com.opencsv:opencsv:5.1.classpath"/>
+    <path refid="library.org.apache.poi:poi-ooxml:3.12.classpath"/>
+    <path refid="library.org.apache.poi:poi:3.12.classpath"/>
+  </path>
+  
+  <path id="ejudge.tools.spreadsheets.generator.runtime.production.module.classpath">
+    <pathelement location="${ejudge.tools.spreadsheets.generator.output.dir}"/>
+    <path refid="library.com.opencsv:opencsv:5.1.classpath"/>
+    <path refid="library.org.apache.poi:poi-ooxml:3.12.classpath"/>
+    <path refid="library.org.apache.poi:poi:3.12.classpath"/>
+  </path>
+  
+  <path id="ejudge.tools.spreadsheets.generator.module.classpath">
+    <path refid="${module.jdk.classpath.ejudge.tools.spreadsheets.generator}"/>
+    <pathelement location="${ejudge.tools.spreadsheets.generator.output.dir}"/>
+    <path refid="library.com.opencsv:opencsv:5.1.classpath"/>
+    <path refid="library.org.apache.poi:poi-ooxml:3.12.classpath"/>
+    <path refid="library.org.apache.poi:poi:3.12.classpath"/>
+  </path>
+  
+  <path id="ejudge.tools.spreadsheets.generator.runtime.module.classpath">
+    <pathelement location="${ejudge.tools.spreadsheets.generator.testoutput.dir}"/>
+    <pathelement location="${ejudge.tools.spreadsheets.generator.output.dir}"/>
+    <path refid="library.com.opencsv:opencsv:5.1.classpath"/>
+    <path refid="library.org.apache.poi:poi-ooxml:3.12.classpath"/>
+    <path refid="library.org.apache.poi:poi:3.12.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.ejudge.tools.spreadsheets.generator">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.ejudge.tools.spreadsheets.generator">
+    <patternset refid="excluded.from.module.ejudge.tools.spreadsheets.generator"/>
+  </patternset>
+  
+  <path id="ejudge.tools.spreadsheets.generator.module.sourcepath">
+    <dirset dir="${module.ejudge.tools.spreadsheets.generator.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.ejudge.tools.spreadsheets.generator" depends="compile.module.ejudge.tools.spreadsheets.generator.production,compile.module.ejudge.tools.spreadsheets.generator.tests" description="Compile module ejudge.tools.spreadsheets.generator"/>
+  
+  <target name="compile.module.ejudge.tools.spreadsheets.generator.production" depends="register.custom.compilers" description="Compile module ejudge.tools.spreadsheets.generator; production classes">
+    <mkdir dir="${ejudge.tools.spreadsheets.generator.output.dir}"/>
+    <javac2 destdir="${ejudge.tools.spreadsheets.generator.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.ejudge.tools.spreadsheets.generator}/javac">
+      <compilerarg line="${compiler.args.ejudge.tools.spreadsheets.generator}"/>
+      <bootclasspath refid="ejudge.tools.spreadsheets.generator.module.bootclasspath"/>
+      <classpath refid="ejudge.tools.spreadsheets.generator.module.production.classpath"/>
+      <src refid="ejudge.tools.spreadsheets.generator.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.ejudge.tools.spreadsheets.generator"/>
+    </javac2>
+    
+    <copy todir="${ejudge.tools.spreadsheets.generator.output.dir}">
+      <fileset dir="${module.ejudge.tools.spreadsheets.generator.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.ejudge.tools.spreadsheets.generator.tests" depends="register.custom.compilers,compile.module.ejudge.tools.spreadsheets.generator.production" description="compile module ejudge.tools.spreadsheets.generator; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.ejudge.tools.spreadsheets.generator" description="cleanup module">
+    <delete dir="${ejudge.tools.spreadsheets.generator.output.dir}"/>
+    <delete dir="${ejudge.tools.spreadsheets.generator.testoutput.dir}"/>
+  </target>
+</project>
