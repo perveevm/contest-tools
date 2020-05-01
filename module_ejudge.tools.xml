@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_ejudge.tools" default="compile.module.ejudge.tools">
+  <dirname property="module.ejudge.tools.basedir" file="${ant.file.module_ejudge.tools}"/>
+  
+  <property name="module.jdk.home.ejudge.tools" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.ejudge.tools" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.ejudge.tools" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.ejudge.tools" value="-encoding UTF-8 -source 11 -target 11 ${compiler.args}"/>
+  
+  <property name="ejudge.tools.output.dir" value="${module.ejudge.tools.basedir}/out/production/ejudge.tools"/>
+  <property name="ejudge.tools.testoutput.dir" value="${module.ejudge.tools.basedir}/out/test/ejudge.tools"/>
+  
+  <path id="ejudge.tools.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="ejudge.tools.module.production.classpath">
+    <path refid="${module.jdk.classpath.ejudge.tools}"/>
+    <path refid="library.org.apache.poi:poi:3.12.classpath"/>
+    <path refid="library.org.apache.poi:poi-ooxml:3.12.classpath"/>
+    <path refid="library.com.opencsv:opencsv:5.1.classpath"/>
+  </path>
+  
+  <path id="ejudge.tools.runtime.production.module.classpath">
+    <pathelement location="${ejudge.tools.output.dir}"/>
+    <path refid="library.org.apache.poi:poi:3.12.classpath"/>
+    <path refid="library.org.apache.poi:poi-ooxml:3.12.classpath"/>
+    <path refid="library.com.opencsv:opencsv:5.1.classpath"/>
+  </path>
+  
+  <path id="ejudge.tools.module.classpath">
+    <path refid="${module.jdk.classpath.ejudge.tools}"/>
+    <pathelement location="${ejudge.tools.output.dir}"/>
+    <path refid="library.org.apache.poi:poi:3.12.classpath"/>
+    <path refid="library.org.apache.poi:poi-ooxml:3.12.classpath"/>
+    <path refid="library.com.opencsv:opencsv:5.1.classpath"/>
+  </path>
+  
+  <path id="ejudge.tools.runtime.module.classpath">
+    <pathelement location="${ejudge.tools.testoutput.dir}"/>
+    <pathelement location="${ejudge.tools.output.dir}"/>
+    <path refid="library.org.apache.poi:poi:3.12.classpath"/>
+    <path refid="library.org.apache.poi:poi-ooxml:3.12.classpath"/>
+    <path refid="library.com.opencsv:opencsv:5.1.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.ejudge.tools">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.ejudge.tools">
+    <patternset refid="excluded.from.module.ejudge.tools"/>
+  </patternset>
+  
+  
+  <target name="compile.module.ejudge.tools" depends="compile.module.ejudge.tools.production,compile.module.ejudge.tools.tests" description="Compile module ejudge.tools"/>
+  
+  <target name="compile.module.ejudge.tools.production" depends="register.custom.compilers" description="Compile module ejudge.tools; production classes"/>
+  
+  <target name="compile.module.ejudge.tools.tests" depends="register.custom.compilers,compile.module.ejudge.tools.production" description="compile module ejudge.tools; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.ejudge.tools" description="cleanup module">
+    <delete dir="${ejudge.tools.output.dir}"/>
+    <delete dir="${ejudge.tools.testoutput.dir}"/>
+  </target>
+</project>
