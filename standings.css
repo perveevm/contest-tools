@@ -12,7 +12,7 @@ table.standings {
 
 .standings .ok {
     /*background-color: lawngreen;*/
-    background-color: rgb(205, 234, 188);
+    background-color: rgb(208, 240, 208);
 }
 
 .standings .rj {
@@ -28,9 +28,9 @@ table.standings {
 }
 
 .standings .r10 {
-
+    background-color: rgb(214, 234, 255);
 }
 
 .standings .r11 {
-
+    background-color: rgb(226, 226, 255);
 }
