@@ -37,8 +37,6 @@ public class StandingsGenerator {
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         Document document = dBuilder.parse(inputXMLFile);
 
-        System.out.println("Parsing file: " + inputXMLFile.getAbsolutePath());
-
         document.getDocumentElement().normalize();
 
         NodeList userNodes = ((Element) document.getElementsByTagName("users").item(0)).getElementsByTagName("user");
@@ -53,7 +51,6 @@ public class StandingsGenerator {
         for (int i = 0; i < userNodes.getLength(); i++) {
             Element user = (Element) userNodes.item(i);
             users.put(Integer.parseInt(user.getAttribute("id")), user.getAttribute("name"));
-            System.out.println(user.getAttribute("name"));
         }
 
         for (int i = 0; i < problemNodes.getLength(); i++) {
@@ -159,6 +156,8 @@ public class StandingsGenerator {
         }
 
         html.append("</tr>\n");
+
+        System.out.println(html);
 
         Comparator<List<ProblemInfo>> comparator = (list1, list2) -> {
             if (config.standingsType == ContestType.IOI) {
