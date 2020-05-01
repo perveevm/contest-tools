@@ -40,7 +40,7 @@ public class StandingsGenerator {
         document.getDocumentElement().normalize();
 
         NodeList userNodes = ((Element) document.getElementsByTagName("users").item(0)).getElementsByTagName("user");
-        NodeList problemNodes = ((Element) document.getElementsByTagName("problems").item(0)).getElementsByTagName("contest");
+        NodeList problemNodes = ((Element) document.getElementsByTagName("problems").item(0)).getElementsByTagName("problem");
         NodeList runNodes = ((Element) document.getElementsByTagName("runs").item(0)).getElementsByTagName("run");
 
         Map<Integer, String> users = new HashMap<>();
