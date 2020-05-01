@@ -46,7 +46,7 @@ public class StandingsGenerator {
         int penalty = 0;
         for (final ParticipantProblemInfo info : problems) {
             if (info.isSolved) {
-                penalty += (info.lastRunTime + 59) / 60 + 20 * info.runsCount;
+                penalty += (info.lastRunTime) / 60 + 20 * info.runsCount;
             }
         }
 
@@ -216,7 +216,7 @@ public class StandingsGenerator {
                     }
 
                     solved1++;
-                    penalty1 += (info.lastRunTime + 59) / 60 + 20 * info.runsCount;
+                    penalty1 += (info.lastRunTime) / 60 + 20 * info.runsCount;
                 }
                 for (final ParticipantProblemInfo info : list2) {
                     if (!info.isSolved) {
@@ -224,7 +224,7 @@ public class StandingsGenerator {
                     }
 
                     solved2++;
-                    penalty2 += (info.lastRunTime + 59) / 60 + 20 * info.runsCount;
+                    penalty2 += (info.lastRunTime) / 60 + 20 * info.runsCount;
                 }
 
                 if (solved1 == solved2) {
@@ -315,7 +315,7 @@ public class StandingsGenerator {
                         }
 
                         score++;
-                        penalty += (participantProblemInfo.lastRunTime + 59) / 60 + 20 * participantProblemInfo.runsCount;
+                        penalty += (participantProblemInfo.lastRunTime) / 60 + 20 * participantProblemInfo.runsCount;
                     } else if (participantProblemInfo.runsCount != 0) {
                         cur.append("-").append(participantProblemInfo.runsCount);
                     }
