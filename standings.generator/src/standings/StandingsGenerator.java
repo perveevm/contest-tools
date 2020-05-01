@@ -17,7 +17,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class StandingsGenerator {
-    private String headData = "<meta http-equiv=\"Content-type\" content='text/html; charset=utf-8' /><style>table, th, td { border: 1px solid black; }</style>";
+    private String headData = "<meta http-equiv=\"Content-type\" content='text/html; charset=utf-8' /><link href=\"standings.css\" rel=\"stylesheet\" type=\"text/css\" />";
 
     private String bodyUpData = "";
     private String bodyDownData = "";
@@ -173,7 +173,7 @@ public class StandingsGenerator {
             }
         }
 
-        html.append("<table width=\"100%\">\n");
+        html.append("<table class=\"standings\">\n");
         html.append("<tbody>\n");
 
         // Make title
