@@ -24,12 +24,14 @@ public class HttpStandingsHandler implements HttpHandler {
         if (exchange.getRequestURI().toString().equals("config")) {
             exchange.sendResponseHeaders(403, 0);
             exchange.close();
+            System.out.println("Access to config.xml denied");
             return;
         }
 
         if (exchange.getRequestURI().toString().equals("/")) {
             exchange.sendResponseHeaders(404, 0);
             exchange.close();
+            System.out.println("There is no contest at root");
             return;
         }
 
@@ -41,12 +43,14 @@ public class HttpStandingsHandler implements HttpHandler {
         } catch (InvalidPathException e) {
             exchange.sendResponseHeaders(404, 0);
             exchange.close();
+            System.out.println("There is no config path: " + e.getMessage());
             return;
         }
 
         if (!Files.exists(path)) {
             exchange.sendResponseHeaders(404, 0);
             exchange.close();
+            System.out.println("There is no config path");
             return;
         }
 
@@ -57,6 +61,7 @@ public class HttpStandingsHandler implements HttpHandler {
         } catch (Exception e) {
             exchange.sendResponseHeaders(501, 0);
             exchange.close();
+            System.out.println("Error reading config: " + e.getMessage());
             return;
         }
 
@@ -66,12 +71,14 @@ public class HttpStandingsHandler implements HttpHandler {
         } catch (InvalidPathException e) {
             exchange.sendResponseHeaders(501, 0);
             exchange.close();
+            System.out.println("Error getting log: " + e.getMessage());
             return;
         }
 
         if (!Files.exists(submits)) {
             exchange.sendResponseHeaders(501, 0);
             exchange.close();
+            System.out.println("Logs don't exist");
             return;
         }
 
@@ -86,6 +93,7 @@ public class HttpStandingsHandler implements HttpHandler {
         } catch (Exception e) {
             exchange.sendResponseHeaders(501, 0);
             exchange.close();
+            System.out.println("Error generating standings: " + e.getMessage());
         }
     }
 }
