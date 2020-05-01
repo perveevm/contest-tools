@@ -385,9 +385,9 @@ public class StandingsGenerator {
                 cur.append("</td>\n");
             }
 
-            cur.append("<td>").append(score).append("</td>\n");
+            cur.append("<td class=\"stat\">").append(score).append("</td>\n");
             if (config.standingsType == ContestType.ICPC) {
-                cur.append("<td>").append(penalty).append("</td>\n");
+                cur.append("<td class=\"stat\">").append(penalty).append("</td>\n");
             }
 
             cur.append("</tr>\n");
