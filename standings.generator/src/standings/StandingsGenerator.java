@@ -321,6 +321,8 @@ public class StandingsGenerator {
                 }
             }
 
+            prevId = id;
+
             int lower = lowerPlace.get(participant.getKey());
             int upper = upperPlace.get(participant.getKey());
 
