@@ -4,13 +4,16 @@ table.new-standings {
     max-width: 95%;
     font-family: serif;
     border-collapse: collapse;
-    min-height: 20px;
 }
 
 .new-standings th, .new-standings td {
     vertical-align: middle;
     border: solid black 1px;
     min-width: 50px;
+}
+
+.new-standings tr {
+    line-height: 20px;
 }
 
 .new-standings .ok {
