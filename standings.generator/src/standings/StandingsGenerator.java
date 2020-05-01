@@ -30,7 +30,9 @@ public class StandingsGenerator {
             "        });\n" +
             "    </script>";
 
-    private String bodyUpData = "";
+    private String bodyUpData =
+            "<div id=\"menuContestSelector\">" +
+            "<h3>%s</h3>";
     private String bodyDownData = "<div id=\"footerCopyright\"></div>";
 
     private int calculateScore(final List<ParticipantProblemInfo> problems, final StandingsConfig config) {
@@ -73,7 +75,7 @@ public class StandingsGenerator {
         html.append(headData).append("\n");
         html.append("</head>\n");
         html.append("<body>\n");
-        html.append(bodyUpData).append("\n");
+        html.append(String.format(bodyUpData, config.standingsTitle)).append("\n");
 
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
