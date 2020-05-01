@@ -21,10 +21,7 @@ public class StandingsGenerator {
             "<meta http-equiv=\"Content-type\" content='text/html; charset=utf-8' />" +
             "<link href=\"../standings.css\" rel=\"stylesheet\" type=\"text/css\" />" +
             "<link rel=\"stylesheet\" href=\"../ejudge/unpriv.css\" type=\"text/css\"/>\n" +
-            "<link rel=\"stylesheet\" href=\"../ejudge/unpriv3.css\" type=\"text/css\"/>\n" +
             "<link rel=\"stylesheet\" href=\"../ejudge/priv.css\" type=\"text/css\"/>\n" +
-            "<link rel=\"stylesheet\" href=\"../ejudge/ejudge3_ss.css\" type=\"text/css\"/>" +
-            "<script type=\"text/javascript\" charset=\"UTF-8\" src=\"../ejudge/priv.js\"></script>\n" +
             "<script src=\"../ejudge/jquery.min.js\"></script>\n" +
             "    <script>\n" +
             "        $(function () {\n" +
