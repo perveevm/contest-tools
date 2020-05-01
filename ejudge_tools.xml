@@ -342,6 +342,9 @@
       <zipfileset src="./lib/poi-ooxml-schemas-3.12.jar"/>
       <zipfileset src="./lib/xmlbeans-2.6.0.jar"/>
       <zipfileset src="./lib/stax-api-1.0.1.jar"/>
+      <manifest>
+        <attribute name="Main-Class" value="Generator" />
+      </manifest>
     </jar>
     <copy file="${temp.jar.path.ejudge.tools.spreadsheets.generator.jar}" tofile="${artifact.temp.output.ejudge.tools.spreadsheets.generator:jar}/ejudge.tools.spreadsheets.generator.jar"/>
   </target>
@@ -351,6 +354,9 @@
     <mkdir dir="${artifact.temp.output.ejudge.tools.standings.generator:jar}"/>
     <jar destfile="${temp.jar.path.ejudge.tools.standings.generator.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
       <zipfileset dir="${ejudge.tools.standings.generator.output.dir}"/>
+      <manifest>
+        <attribute name="Main-Class" value="ServerTest" />
+      </manifest>
     </jar>
     <copy file="${temp.jar.path.ejudge.tools.standings.generator.jar}" tofile="${artifact.temp.output.ejudge.tools.standings.generator:jar}/ejudge.tools.standings.generator.jar"/>
   </target>
