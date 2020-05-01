@@ -81,11 +81,231 @@
   
   <!-- Modules -->
   
-  <import file="${basedir}/module_ejudge.tools.xml"/>
   
-  <import file="${basedir}/spreadsheets.generator/module_ejudge.tools.spreadsheets.generator.xml"/>
+  <!-- Module ejudge.tools -->
   
-  <import file="${basedir}/standings.generator/module_ejudge.tools.standings.generator.xml"/>
+  <dirname property="module.ejudge.tools.basedir" file="${ant.file}"/>
+  
+  
+  
+  <property name="compiler.args.ejudge.tools" value="-encoding UTF-8 -source 8 -target 1.8 ${compiler.args}"/>
+  
+  <property name="ejudge.tools.output.dir" value="${module.ejudge.tools.basedir}/target/classes"/>
+  <property name="ejudge.tools.testoutput.dir" value="${module.ejudge.tools.basedir}/target/test-classes"/>
+  
+  <path id="ejudge.tools.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="ejudge.tools.module.production.classpath">
+    <path refid="library.org.apache.poi:poi:3.12.classpath"/>
+    <path refid="library.org.apache.poi:poi-ooxml:3.12.classpath"/>
+    <path refid="library.com.opencsv:opencsv:5.1.classpath"/>
+  </path>
+  
+  <path id="ejudge.tools.runtime.production.module.classpath">
+    <pathelement location="${ejudge.tools.output.dir}"/>
+    <path refid="library.org.apache.poi:poi:3.12.classpath"/>
+    <path refid="library.org.apache.poi:poi-ooxml:3.12.classpath"/>
+    <path refid="library.com.opencsv:opencsv:5.1.classpath"/>
+  </path>
+  
+  <path id="ejudge.tools.module.classpath">
+    <pathelement location="${ejudge.tools.output.dir}"/>
+    <path refid="library.org.apache.poi:poi:3.12.classpath"/>
+    <path refid="library.org.apache.poi:poi-ooxml:3.12.classpath"/>
+    <path refid="library.com.opencsv:opencsv:5.1.classpath"/>
+  </path>
+  
+  <path id="ejudge.tools.runtime.module.classpath">
+    <pathelement location="${ejudge.tools.testoutput.dir}"/>
+    <pathelement location="${ejudge.tools.output.dir}"/>
+    <path refid="library.org.apache.poi:poi:3.12.classpath"/>
+    <path refid="library.org.apache.poi:poi-ooxml:3.12.classpath"/>
+    <path refid="library.com.opencsv:opencsv:5.1.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.ejudge.tools">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.ejudge.tools">
+    <patternset refid="excluded.from.module.ejudge.tools"/>
+  </patternset>
+  
+  
+  <target name="compile.module.ejudge.tools" depends="compile.module.ejudge.tools.production,compile.module.ejudge.tools.tests" description="Compile module ejudge.tools"/>
+  
+  <target name="compile.module.ejudge.tools.production" description="Compile module ejudge.tools; production classes"/>
+  
+  <target name="compile.module.ejudge.tools.tests" depends="compile.module.ejudge.tools.production" description="compile module ejudge.tools; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.ejudge.tools" description="cleanup module">
+    <delete dir="${ejudge.tools.output.dir}"/>
+    <delete dir="${ejudge.tools.testoutput.dir}"/>
+  </target>
+  
+  
+  <!-- Module ejudge.tools.spreadsheets.generator -->
+  
+  <dirname property="module.ejudge.tools.spreadsheets.generator.basedir" file="${ant.file}"/>
+  
+  
+  
+  <property name="compiler.args.ejudge.tools.spreadsheets.generator" value="-encoding UTF-8 -source 11 -target 11 ${compiler.args}"/>
+  
+  <property name="ejudge.tools.spreadsheets.generator.output.dir" value="${module.ejudge.tools.spreadsheets.generator.basedir}/out/production/ejudge.tools.spreadsheets.generator"/>
+  <property name="ejudge.tools.spreadsheets.generator.testoutput.dir" value="${module.ejudge.tools.spreadsheets.generator.basedir}/out/test/ejudge.tools.spreadsheets.generator"/>
+  
+  <path id="ejudge.tools.spreadsheets.generator.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="ejudge.tools.spreadsheets.generator.module.production.classpath">
+    <path refid="library.com.opencsv:opencsv:5.1.classpath"/>
+    <path refid="library.org.apache.poi:poi-ooxml:3.12.classpath"/>
+    <path refid="library.org.apache.poi:poi:3.12.classpath"/>
+  </path>
+  
+  <path id="ejudge.tools.spreadsheets.generator.runtime.production.module.classpath">
+    <pathelement location="${ejudge.tools.spreadsheets.generator.output.dir}"/>
+    <path refid="library.com.opencsv:opencsv:5.1.classpath"/>
+    <path refid="library.org.apache.poi:poi-ooxml:3.12.classpath"/>
+    <path refid="library.org.apache.poi:poi:3.12.classpath"/>
+  </path>
+  
+  <path id="ejudge.tools.spreadsheets.generator.module.classpath">
+    <pathelement location="${ejudge.tools.spreadsheets.generator.output.dir}"/>
+    <path refid="library.com.opencsv:opencsv:5.1.classpath"/>
+    <path refid="library.org.apache.poi:poi-ooxml:3.12.classpath"/>
+    <path refid="library.org.apache.poi:poi:3.12.classpath"/>
+  </path>
+  
+  <path id="ejudge.tools.spreadsheets.generator.runtime.module.classpath">
+    <pathelement location="${ejudge.tools.spreadsheets.generator.testoutput.dir}"/>
+    <pathelement location="${ejudge.tools.spreadsheets.generator.output.dir}"/>
+    <path refid="library.com.opencsv:opencsv:5.1.classpath"/>
+    <path refid="library.org.apache.poi:poi-ooxml:3.12.classpath"/>
+    <path refid="library.org.apache.poi:poi:3.12.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.ejudge.tools.spreadsheets.generator">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.ejudge.tools.spreadsheets.generator">
+    <patternset refid="excluded.from.module.ejudge.tools.spreadsheets.generator"/>
+  </patternset>
+  
+  <path id="ejudge.tools.spreadsheets.generator.module.sourcepath">
+    <dirset dir="${module.ejudge.tools.spreadsheets.generator.basedir}/spreadsheets.generator">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.ejudge.tools.spreadsheets.generator" depends="compile.module.ejudge.tools.spreadsheets.generator.production,compile.module.ejudge.tools.spreadsheets.generator.tests" description="Compile module ejudge.tools.spreadsheets.generator"/>
+  
+  <target name="compile.module.ejudge.tools.spreadsheets.generator.production" description="Compile module ejudge.tools.spreadsheets.generator; production classes">
+    <mkdir dir="${ejudge.tools.spreadsheets.generator.output.dir}"/>
+    <javac destdir="${ejudge.tools.spreadsheets.generator.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
+      <compilerarg line="${compiler.args.ejudge.tools.spreadsheets.generator}"/>
+      <bootclasspath refid="ejudge.tools.spreadsheets.generator.module.bootclasspath"/>
+      <classpath refid="ejudge.tools.spreadsheets.generator.module.production.classpath"/>
+      <src refid="ejudge.tools.spreadsheets.generator.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.ejudge.tools.spreadsheets.generator"/>
+    </javac>
+    
+    <copy todir="${ejudge.tools.spreadsheets.generator.output.dir}">
+      <fileset dir="${module.ejudge.tools.spreadsheets.generator.basedir}/spreadsheets.generator/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.ejudge.tools.spreadsheets.generator.tests" depends="compile.module.ejudge.tools.spreadsheets.generator.production" description="compile module ejudge.tools.spreadsheets.generator; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.ejudge.tools.spreadsheets.generator" description="cleanup module">
+    <delete dir="${ejudge.tools.spreadsheets.generator.output.dir}"/>
+    <delete dir="${ejudge.tools.spreadsheets.generator.testoutput.dir}"/>
+  </target>
+  
+  
+  <!-- Module ejudge.tools.standings.generator -->
+  
+  <dirname property="module.ejudge.tools.standings.generator.basedir" file="${ant.file}"/>
+  
+  
+  
+  <property name="compiler.args.ejudge.tools.standings.generator" value="-encoding UTF-8 -source 11 -target 11 ${compiler.args}"/>
+  
+  <property name="ejudge.tools.standings.generator.output.dir" value="${module.ejudge.tools.standings.generator.basedir}/out/production/ejudge.tools.standings.generator"/>
+  <property name="ejudge.tools.standings.generator.testoutput.dir" value="${module.ejudge.tools.standings.generator.basedir}/out/test/ejudge.tools.standings.generator"/>
+  
+  <path id="ejudge.tools.standings.generator.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="ejudge.tools.standings.generator.module.production.classpath"/>
+  
+  <path id="ejudge.tools.standings.generator.runtime.production.module.classpath">
+    <pathelement location="${ejudge.tools.standings.generator.output.dir}"/>
+  </path>
+  
+  <path id="ejudge.tools.standings.generator.module.classpath">
+    <pathelement location="${ejudge.tools.standings.generator.output.dir}"/>
+  </path>
+  
+  <path id="ejudge.tools.standings.generator.runtime.module.classpath">
+    <pathelement location="${ejudge.tools.standings.generator.testoutput.dir}"/>
+    <pathelement location="${ejudge.tools.standings.generator.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.ejudge.tools.standings.generator">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.ejudge.tools.standings.generator">
+    <patternset refid="excluded.from.module.ejudge.tools.standings.generator"/>
+  </patternset>
+  
+  <path id="ejudge.tools.standings.generator.module.sourcepath">
+    <dirset dir="${module.ejudge.tools.standings.generator.basedir}/standings.generator">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.ejudge.tools.standings.generator" depends="compile.module.ejudge.tools.standings.generator.production,compile.module.ejudge.tools.standings.generator.tests" description="Compile module ejudge.tools.standings.generator"/>
+  
+  <target name="compile.module.ejudge.tools.standings.generator.production" description="Compile module ejudge.tools.standings.generator; production classes">
+    <mkdir dir="${ejudge.tools.standings.generator.output.dir}"/>
+    <javac destdir="${ejudge.tools.standings.generator.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
+      <compilerarg line="${compiler.args.ejudge.tools.standings.generator}"/>
+      <bootclasspath refid="ejudge.tools.standings.generator.module.bootclasspath"/>
+      <classpath refid="ejudge.tools.standings.generator.module.production.classpath"/>
+      <src refid="ejudge.tools.standings.generator.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.ejudge.tools.standings.generator"/>
+    </javac>
+    
+    <copy todir="${ejudge.tools.standings.generator.output.dir}">
+      <fileset dir="${module.ejudge.tools.standings.generator.basedir}/standings.generator/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.ejudge.tools.standings.generator.tests" depends="compile.module.ejudge.tools.standings.generator.production" description="compile module ejudge.tools.standings.generator; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.ejudge.tools.standings.generator" description="cleanup module">
+    <delete dir="${ejudge.tools.standings.generator.output.dir}"/>
+    <delete dir="${ejudge.tools.standings.generator.testoutput.dir}"/>
+  </target>
   
   <target name="init" description="Build initialization">
     <!-- Perform any build initialization in this target -->
