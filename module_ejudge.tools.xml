@@ -57,9 +57,9 @@
   
   <target name="compile.module.ejudge.tools" depends="compile.module.ejudge.tools.production,compile.module.ejudge.tools.tests" description="Compile module ejudge.tools"/>
   
-  <target name="compile.module.ejudge.tools.production" depends="register.custom.compilers" description="Compile module ejudge.tools; production classes"/>
+  <target name="compile.module.ejudge.tools.production" description="Compile module ejudge.tools; production classes"/>
   
-  <target name="compile.module.ejudge.tools.tests" depends="register.custom.compilers,compile.module.ejudge.tools.production" description="compile module ejudge.tools; test classes" unless="skip.tests"/>
+  <target name="compile.module.ejudge.tools.tests" depends="compile.module.ejudge.tools.production" description="compile module ejudge.tools; test classes" unless="skip.tests"/>
   
   <target name="clean.module.ejudge.tools" description="cleanup module">
     <delete dir="${ejudge.tools.output.dir}"/>

@@ -63,15 +63,15 @@
   
   <target name="compile.module.ejudge.tools.spreadsheets.generator" depends="compile.module.ejudge.tools.spreadsheets.generator.production,compile.module.ejudge.tools.spreadsheets.generator.tests" description="Compile module ejudge.tools.spreadsheets.generator"/>
   
-  <target name="compile.module.ejudge.tools.spreadsheets.generator.production" depends="register.custom.compilers" description="Compile module ejudge.tools.spreadsheets.generator; production classes">
+  <target name="compile.module.ejudge.tools.spreadsheets.generator.production" description="Compile module ejudge.tools.spreadsheets.generator; production classes">
     <mkdir dir="${ejudge.tools.spreadsheets.generator.output.dir}"/>
-    <javac2 destdir="${ejudge.tools.spreadsheets.generator.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.ejudge.tools.spreadsheets.generator}/javac">
+    <javac destdir="${ejudge.tools.spreadsheets.generator.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.ejudge.tools.spreadsheets.generator}/javac">
       <compilerarg line="${compiler.args.ejudge.tools.spreadsheets.generator}"/>
       <bootclasspath refid="ejudge.tools.spreadsheets.generator.module.bootclasspath"/>
       <classpath refid="ejudge.tools.spreadsheets.generator.module.production.classpath"/>
       <src refid="ejudge.tools.spreadsheets.generator.module.sourcepath"/>
       <patternset refid="excluded.from.compilation.ejudge.tools.spreadsheets.generator"/>
-    </javac2>
+    </javac>
     
     <copy todir="${ejudge.tools.spreadsheets.generator.output.dir}">
       <fileset dir="${module.ejudge.tools.spreadsheets.generator.basedir}/src">
@@ -81,7 +81,7 @@
     </copy>
   </target>
   
-  <target name="compile.module.ejudge.tools.spreadsheets.generator.tests" depends="register.custom.compilers,compile.module.ejudge.tools.spreadsheets.generator.production" description="compile module ejudge.tools.spreadsheets.generator; test classes" unless="skip.tests"/>
+  <target name="compile.module.ejudge.tools.spreadsheets.generator.tests" depends="compile.module.ejudge.tools.spreadsheets.generator.production" description="compile module ejudge.tools.spreadsheets.generator; test classes" unless="skip.tests"/>
   
   <target name="clean.module.ejudge.tools.spreadsheets.generator" description="cleanup module">
     <delete dir="${ejudge.tools.spreadsheets.generator.output.dir}"/>
