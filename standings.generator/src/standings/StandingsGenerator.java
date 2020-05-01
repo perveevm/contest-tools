@@ -37,6 +37,8 @@ public class StandingsGenerator {
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         Document document = dBuilder.parse(inputXMLFile);
 
+        System.out.println("Parsing file: " + inputXMLFile.getAbsolutePath());
+
         document.getDocumentElement().normalize();
 
         System.out.println(document.toString());
