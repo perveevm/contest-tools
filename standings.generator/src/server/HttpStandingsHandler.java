@@ -78,7 +78,7 @@ public class HttpStandingsHandler implements HttpHandler {
         if (!Files.exists(submits)) {
             exchange.sendResponseHeaders(501, 0);
             exchange.close();
-            System.out.println("Logs don't exist");
+            System.out.println("Logs don't exist: " + submits.toString());
             return;
         }
 
