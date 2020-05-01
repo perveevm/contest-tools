@@ -344,9 +344,9 @@ public class StandingsGenerator {
             int upper = upperPlace.get(participant.getKey());
 
             if (lower != upper) {
-                cur.append(String.format("<td>%d-%d</td>\n", lowerPlace.get(participant.getKey()), upperPlace.get(participant.getKey())));
+                cur.append(String.format("<td class=\"stat\">%d-%d</td>\n", lowerPlace.get(participant.getKey()), upperPlace.get(participant.getKey())));
             } else {
-                cur.append(String.format("<td>%d</td>\n", lower));
+                cur.append(String.format("<td class=\"stat\">%d</td>\n", lower));
             }
             cur.append(String.format("<td>%s</td>", users.get(participant.getKey()))).append("\n");
 
