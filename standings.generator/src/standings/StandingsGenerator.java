@@ -41,8 +41,6 @@ public class StandingsGenerator {
 
         document.getDocumentElement().normalize();
 
-        System.out.println(document.toString());
-
         NodeList userNodes = ((Element) document.getElementsByTagName("users").item(0)).getElementsByTagName("user");
         NodeList problemNodes = ((Element) document.getElementsByTagName("problems").item(0)).getElementsByTagName("contest");
         NodeList runNodes = ((Element) document.getElementsByTagName("runs").item(0)).getElementsByTagName("run");
@@ -55,6 +53,7 @@ public class StandingsGenerator {
         for (int i = 0; i < userNodes.getLength(); i++) {
             Element user = (Element) userNodes.item(i);
             users.put(Integer.parseInt(user.getAttribute("id")), user.getAttribute("name"));
+            System.out.println(user.getAttribute("name"));
         }
 
         for (int i = 0; i < problemNodes.getLength(); i++) {
