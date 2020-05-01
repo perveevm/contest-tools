@@ -277,7 +277,14 @@ public class StandingsGenerator {
 
             cur.append("<tr>\n");
 
-            cur.append(String.format("<td>%d-%d</td>\n", lowerPlace.get(participant.getKey()), upperPlace.get(participant.getKey())));
+            int lower = lowerPlace.get(participant.getKey());
+            int upper = upperPlace.get(participant.getKey());
+
+            if (lower != upper) {
+                cur.append(String.format("<td>%d-%d</td>\n", lowerPlace.get(participant.getKey()), upperPlace.get(participant.getKey())));
+            } else {
+                cur.append(String.format("<td>%d</td>\n", lower));
+            }
             cur.append(String.format("<td>%s</td>", users.get(participant.getKey()))).append("\n");
 
             int score = 0;
