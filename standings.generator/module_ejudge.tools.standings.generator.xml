@@ -2,9 +2,6 @@
 <project name="module_ejudge.tools.standings.generator" default="compile.module.ejudge.tools.standings.generator">
   <dirname property="module.ejudge.tools.standings.generator.basedir" file="${ant.file.module_ejudge.tools.standings.generator}"/>
   
-  <property name="module.jdk.home.ejudge.tools.standings.generator" value="${project.jdk.home}"/>
-  <property name="module.jdk.bin.ejudge.tools.standings.generator" value="${project.jdk.bin}"/>
-  <property name="module.jdk.classpath.ejudge.tools.standings.generator" value="${project.jdk.classpath}"/>
   
   <property name="compiler.args.ejudge.tools.standings.generator" value="-encoding UTF-8 -source 11 -target 11 ${compiler.args}"/>
   
@@ -15,16 +12,13 @@
     <!-- Paths to be included in compilation bootclasspath -->
   </path>
   
-  <path id="ejudge.tools.standings.generator.module.production.classpath">
-    <path refid="${module.jdk.classpath.ejudge.tools.standings.generator}"/>
-  </path>
+  <path id="ejudge.tools.standings.generator.module.production.classpath"/>
   
   <path id="ejudge.tools.standings.generator.runtime.production.module.classpath">
     <pathelement location="${ejudge.tools.standings.generator.output.dir}"/>
   </path>
   
   <path id="ejudge.tools.standings.generator.module.classpath">
-    <path refid="${module.jdk.classpath.ejudge.tools.standings.generator}"/>
     <pathelement location="${ejudge.tools.standings.generator.output.dir}"/>
   </path>
   
@@ -53,7 +47,7 @@
   
   <target name="compile.module.ejudge.tools.standings.generator.production" description="Compile module ejudge.tools.standings.generator; production classes">
     <mkdir dir="${ejudge.tools.standings.generator.output.dir}"/>
-    <javac destdir="${ejudge.tools.standings.generator.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.ejudge.tools.standings.generator}/javac">
+    <javac destdir="${ejudge.tools.standings.generator.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
       <compilerarg line="${compiler.args.ejudge.tools.standings.generator}"/>
       <bootclasspath refid="ejudge.tools.standings.generator.module.bootclasspath"/>
       <classpath refid="ejudge.tools.standings.generator.module.production.classpath"/>

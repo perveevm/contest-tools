@@ -2,9 +2,6 @@
 <project name="module_ejudge.tools.spreadsheets.generator" default="compile.module.ejudge.tools.spreadsheets.generator">
   <dirname property="module.ejudge.tools.spreadsheets.generator.basedir" file="${ant.file.module_ejudge.tools.spreadsheets.generator}"/>
   
-  <property name="module.jdk.home.ejudge.tools.spreadsheets.generator" value="${project.jdk.home}"/>
-  <property name="module.jdk.bin.ejudge.tools.spreadsheets.generator" value="${project.jdk.bin}"/>
-  <property name="module.jdk.classpath.ejudge.tools.spreadsheets.generator" value="${project.jdk.classpath}"/>
   
   <property name="compiler.args.ejudge.tools.spreadsheets.generator" value="-encoding UTF-8 -source 11 -target 11 ${compiler.args}"/>
   
@@ -16,7 +13,6 @@
   </path>
   
   <path id="ejudge.tools.spreadsheets.generator.module.production.classpath">
-    <path refid="${module.jdk.classpath.ejudge.tools.spreadsheets.generator}"/>
     <path refid="library.com.opencsv:opencsv:5.1.classpath"/>
     <path refid="library.org.apache.poi:poi-ooxml:3.12.classpath"/>
     <path refid="library.org.apache.poi:poi:3.12.classpath"/>
@@ -30,7 +26,6 @@
   </path>
   
   <path id="ejudge.tools.spreadsheets.generator.module.classpath">
-    <path refid="${module.jdk.classpath.ejudge.tools.spreadsheets.generator}"/>
     <pathelement location="${ejudge.tools.spreadsheets.generator.output.dir}"/>
     <path refid="library.com.opencsv:opencsv:5.1.classpath"/>
     <path refid="library.org.apache.poi:poi-ooxml:3.12.classpath"/>
@@ -65,7 +60,7 @@
   
   <target name="compile.module.ejudge.tools.spreadsheets.generator.production" description="Compile module ejudge.tools.spreadsheets.generator; production classes">
     <mkdir dir="${ejudge.tools.spreadsheets.generator.output.dir}"/>
-    <javac destdir="${ejudge.tools.spreadsheets.generator.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.ejudge.tools.spreadsheets.generator}/javac">
+    <javac destdir="${ejudge.tools.spreadsheets.generator.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
       <compilerarg line="${compiler.args.ejudge.tools.spreadsheets.generator}"/>
       <bootclasspath refid="ejudge.tools.spreadsheets.generator.module.bootclasspath"/>
       <classpath refid="ejudge.tools.spreadsheets.generator.module.production.classpath"/>
