@@ -13,6 +13,10 @@ table.new-standings {
     min-height: 20px;
 }
 
+.new-standings tr {
+    min-height: 20px;
+}
+
 .new-standings .ok {
     /*background-color: lawngreen;*/
     background-color: rgb(208, 240, 208);
