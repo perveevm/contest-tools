@@ -315,9 +315,21 @@ public class StandingsGenerator {
                         }
 
                         score++;
-                        penalty += (participantProblemInfo.lastRunTime) / 60 + 20 * participantProblemInfo.runsCount;
+                        int curPenalty = (participantProblemInfo.lastRunTime) / 60 + 20 * participantProblemInfo.runsCount;
+                        penalty += curPenalty
+
+                        int h = curPenalty / 60;
+                        int m = curPenalty % 60;
+
+                        cur.append(String.format("<div>%d:%02d</div>", h, m));
                     } else if (participantProblemInfo.runsCount != 0) {
                         cur.append("-").append(participantProblemInfo.runsCount);
+
+                        int curPenalty = (participantProblemInfo.lastRunTime) / 60 + 20 * participantProblemInfo.runsCount;
+                        int h = curPenalty / 60;
+                        int m = curPenalty % 60;
+
+                        cur.append(String.format("<div>%d:%02d</div>", h, m));
                     }
                 }
 
