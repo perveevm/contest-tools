@@ -20,6 +20,11 @@ public class StandingsGenerator {
     private String headData =
             "<meta http-equiv=\"Content-type\" content='text/html; charset=utf-8' />" +
             "<link href=\"../standings.css\" rel=\"stylesheet\" type=\"text/css\" />" +
+            "<link rel=\"stylesheet\" href=\"../ejudge/unpriv.css\" type=\"text/css\"/>\n" +
+            "<link rel=\"stylesheet\" href=\"../ejudge/unpriv3.css\" type=\"text/css\"/>\n" +
+            "<link rel=\"stylesheet\" href=\"../ejudge/priv.css\" type=\"text/css\"/>\n" +
+            "<link rel=\"stylesheet\" href=\"../ejudge/ejudge3_ss.css\" type=\"text/css\"/>\n" +
+            "<script type=\"text/javascript\" charset=\"UTF-8\" src=\"../ejudge/priv.js\"></script>" +
             "<script src=\"../ejudge/jquery.min.js\"></script>\n" +
             "    <script>\n" +
             "        $(function () {\n" +
@@ -29,9 +34,14 @@ public class StandingsGenerator {
             "    </script>";
 
     private String bodyUpData =
-//            "<div id=\"menuContestSelector\">" +
+            "<div id=\"main-cont\"><div id=\"container\">\n" +
+            "    <div id=\"header\">\n" +
+            "        <div id=\"logo\"><img src='./ejudge/logo3.png' alt=\"logo\"/></div>\n" +
+            "        <h1>Центр Стратегия – Ejudge</h1>\n" +
+            "    </div>\n" +
+            "    <div id=\"menuContestSelector\"></div>" +
             "<div align=\"center\"><h3>%s</h3></div>";
-    private String bodyDownData = "<div id=\"footerCopyright\"></div>";
+    private String bodyDownData = "<div id=\"footerCopyright\"></div></div></div>";
 
     private int calculateScore(final List<ParticipantProblemInfo> problems, final StandingsConfig config) {
         int score = 0;
