@@ -1,4 +1,4 @@
-table.standings {
+table.new-standings {
     margin-left: auto;
     margin-right: auto;
     max-width: 85%;
@@ -6,40 +6,40 @@ table.standings {
     border-collapse: collapse;
 }
 
-.standings th, .standings td {
+.new-standings th, .new-standings td {
     vertical-align: middle;
     border: solid black 1px;
     min-width: 50px;
 }
 
-.standings .ok {
+.new-standings .ok {
     /*background-color: lawngreen;*/
     background-color: rgb(208, 240, 208);
     text-align: center;
 }
 
-.standings .rj {
+.new-standings .rj {
     background-color: rgb(247, 94, 99);
     text-align: center;
 }
 
-.standings .stat {
+.new-standings .stat {
     text-align: center;
 }
 
-.standings .r00 {
+.new-standings .r00 {
     background-color: rgb(218, 218, 218);
 }
 
-.standings .r01 {
+.new-standings .r01 {
     background-color: rgb(236, 236, 236);
 }
 
-.standings .r10 {
+.new-standings .r10 {
     background-color: rgb(234, 255, 255);
 }
 
-.standings .r11 {
+.new-standings .r11 {
     background-color: rgb(224, 244, 255);
 }
 

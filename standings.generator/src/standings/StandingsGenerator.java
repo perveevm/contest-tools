@@ -184,7 +184,7 @@ public class StandingsGenerator {
             }
         }
 
-        html.append("<table class=\"standings\">\n");
+        html.append("<table class=\"new-standings\">\n");
         html.append("<tbody>\n");
 
         // Make title
