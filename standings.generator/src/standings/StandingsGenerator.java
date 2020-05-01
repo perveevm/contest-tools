@@ -113,7 +113,9 @@ public class StandingsGenerator {
                 case "OK": {
                     int problemID = Integer.parseInt(run.getAttribute("prob_id")) - 1;
 
-                    if (!standings.get(userID).get(problemID).isSolved) {
+                    boolean needLastAC = config.needLastAC.contains(problems.get(problemID));
+
+                    if (!standings.get(userID).get(problemID).isSolved || needLastAC) {
                         standings.get(userID).get(problemID).isSolved = true;
                         standings.get(userID).get(problemID).lastRunTime = time;
 
@@ -131,7 +133,9 @@ public class StandingsGenerator {
                     int problemID = Integer.parseInt(run.getAttribute("prob_id")) - 1;
                     int score = Integer.parseInt(run.getAttribute("score"));
 
-                    if (standings.get(userID).get(problemID).score < score) {
+                    boolean needLastAC = config.needLastAC.contains(problems.get(problemID));
+
+                    if (standings.get(userID).get(problemID).score < score || needLastAC) {
                         standings.get(userID).get(problemID).score = score;
                         standings.get(userID).get(problemID).lastRunTime = time;
 
@@ -152,7 +156,9 @@ public class StandingsGenerator {
                 case "WT": {
                     int problemID = Integer.parseInt(run.getAttribute("prob_id")) - 1;
 
-                    if (!standings.get(userID).get(problemID).isSolved) {
+                    boolean needLastAC = config.needLastAC.contains(problems.get(problemID));
+
+                    if (!standings.get(userID).get(problemID).isSolved || needLastAC) {
                         standings.get(userID).get(problemID).runsCount++;
                         standings.get(userID).get(problemID).lastRunTime = time;
 

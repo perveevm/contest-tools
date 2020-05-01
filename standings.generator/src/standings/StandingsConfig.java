@@ -10,8 +10,10 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 public class StandingsConfig {
     public String standingsTitle = "Standings";
@@ -20,6 +22,8 @@ public class StandingsConfig {
     public boolean showZeros = false;
 
     public int contestID = 1;
+
+    public Set<String> needLastAC = Collections.emptySet();
 
     // TODO: use this parameters
     public List<Integer> contestsID = Collections.emptyList();
@@ -39,6 +43,7 @@ public class StandingsConfig {
         NodeList standingsTypeNodes = document.getElementsByTagName("type");
         NodeList zerosNodes = document.getElementsByTagName("zeros");
         NodeList contestIDNode = document.getElementsByTagName("contests");
+        NodeList lastACNode = document.getElementsByTagName("lastAC");
 
         if (titleNodes.getLength() != 0) {
             standingsTitle = titleNodes.item(0).getTextContent();
@@ -73,6 +78,10 @@ public class StandingsConfig {
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("Can't parse contest ID");
             }
+        }
+        if (lastACNode.getLength() != 0) {
+            String lastAC = lastACNode.item(0).getTextContent().trim();
+            needLastAC.addAll(Arrays.asList(lastAC.split(",")));
         }
     }
 }
