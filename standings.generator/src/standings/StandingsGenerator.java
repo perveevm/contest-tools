@@ -297,10 +297,15 @@ public class StandingsGenerator {
         }
 
         int parity = 0;
+        int prevId = idPlace.get(sortedStandings.get(0).getKey());
         for (Map.Entry<Integer, List<ParticipantProblemInfo>> participant : sortedStandings) {
             StringBuilder cur = new StringBuilder();
 
             int id = idPlace.get(participant.getKey());
+
+            if (id != prevId) {
+                parity = 0;
+            }
 
             if (id % 2 == 0) {
                 if (parity % 2 == 0) {
