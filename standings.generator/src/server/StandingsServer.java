@@ -49,6 +49,8 @@ public class StandingsServer implements AutoCloseable {
         server.bind(new InetSocketAddress(host, port), 1000);
         server.createContext("/", new HttpStandingsHandler(judgesDir));
         server.start();
+
+        System.out.println("Started server at host: " + host + ", port: " + port);
     }
 
     @Override
