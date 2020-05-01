@@ -249,9 +249,12 @@ public class StandingsGenerator {
 
         Map<Integer, Integer> lowerPlace = new HashMap<>();
         Map<Integer, Integer> upperPlace = new HashMap<>();
+        Map<Integer, Integer> idPlace = new HashMap<>();
 
         int l = 0;
+        int curId = 0;
         lowerPlace.put(sortedStandings.get(0).getKey(), 1);
+        idPlace.put(sortedStandings.get(0).getKey(), curId);
 
         int oldScore = calculateScore(sortedStandings.get(0).getValue(), config);
         int oldPenalty = calculatePenalty(sortedStandings.get(0).getValue(), config);
@@ -267,8 +270,10 @@ public class StandingsGenerator {
                 for (int i = l; i < r; i++) {
                     lowerPlace.put(sortedStandings.get(i).getKey(), lower);
                     upperPlace.put(sortedStandings.get(i).getKey(), upper);
+                    idPlace.put(sortedStandings.get(i).getKey(), curId);
                 }
 
+                curId++;
                 l = r;
                 oldScore = score;
                 oldPenalty = penalty;
@@ -278,12 +283,28 @@ public class StandingsGenerator {
         for (int i = l; i < sortedStandings.size(); i++) {
             lowerPlace.put(sortedStandings.get(i).getKey(), l + 1);
             upperPlace.put(sortedStandings.get(i).getKey(), sortedStandings.size());
+            idPlace.put(sortedStandings.get(i).getKey(), curId);
         }
 
+        int parity = 0;
         for (Map.Entry<Integer, List<ParticipantProblemInfo>> participant : sortedStandings) {
             StringBuilder cur = new StringBuilder();
 
-            cur.append("<tr>\n");
+            int id = idPlace.get(participant.getKey());
+
+            if (id % 2 == 0) {
+                if (parity % 2 == 0) {
+                    cur.append("<tr class=\"r00\">\n");
+                } else {
+                    cur.append("<tr class=\"r01\">\n");
+                }
+            } else {
+                if (parity % 2 == 0) {
+                    cur.append("<tr class=\"r10\">\n");
+                } else {
+                    cur.append("<tr class=\"r11\">\n");
+                }
+            }
 
             int lower = lowerPlace.get(participant.getKey());
             int upper = upperPlace.get(participant.getKey());
@@ -357,6 +378,8 @@ public class StandingsGenerator {
             if (score != 0 || config.showZeros) {
                 html.append(cur);
             }
+
+            parity ^= 1;
         }
 
         html.append("</tbody>\n");
