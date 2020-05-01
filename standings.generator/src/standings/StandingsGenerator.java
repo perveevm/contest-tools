@@ -31,7 +31,7 @@ public class StandingsGenerator {
             "    </script>";
 
     private String bodyUpData =
-            "<div id=\"menuContestSelector\">" +
+//            "<div id=\"menuContestSelector\">" +
             "<h3>%s</h3>";
     private String bodyDownData = "<div id=\"footerCopyright\"></div>";
 
