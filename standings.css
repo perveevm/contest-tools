@@ -10,6 +10,7 @@ table.new-standings {
     vertical-align: middle;
     border: solid black 1px;
     min-width: 50px;
+    min-height: 20px;
 }
 
 .new-standings .ok {
