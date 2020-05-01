@@ -5,6 +5,7 @@ import com.sun.net.httpserver.HttpHandler;
 import standings.StandingsConfig;
 import standings.StandingsGenerator;
 
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.file.Files;
@@ -75,10 +76,10 @@ public class HttpStandingsHandler implements HttpHandler {
             return;
         }
 
-        if (!Files.exists(submits)) {
+        if (!Files.exists(submits) || !Files.isReadable(submits)) {
             exchange.sendResponseHeaders(501, 0);
             exchange.close();
-            System.out.println("Logs don't exist: " + submits.toString());
+            System.out.println("Logs don't exist or isn't readable: " + submits.toString());
             return;
         }
 
