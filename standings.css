@@ -28,9 +28,9 @@ table.standings {
 }
 
 .standings .r10 {
-    background-color: rgb(214, 234, 255);
+    background-color: lightskyblue;
 }
 
 .standings .r11 {
-    background-color: rgb(226, 226, 255);
+    background-color: rgb(214, 234, 255);
 }
