@@ -17,10 +17,19 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class StandingsGenerator {
-    private String headData = "<meta http-equiv=\"Content-type\" content='text/html; charset=utf-8' /><link href=\"../standings.css\" rel=\"stylesheet\" type=\"text/css\" />";
+    private String headData =
+            "<meta http-equiv=\"Content-type\" content='text/html; charset=utf-8' />" +
+            "<link href=\"../standings.css\" rel=\"stylesheet\" type=\"text/css\" />" +
+            "<script src=\"../ejudge/jquery.min.js\"></script>\n" +
+            "    <script>\n" +
+            "        $(function () {\n" +
+            "            $(\"#menuContestSelector\").load(\"../menu.html\");\n" +
+            "            $(\"#footerCopyright\").load(\"../footer.html\");\n" +
+            "        });\n" +
+            "    </script>";
 
     private String bodyUpData = "";
-    private String bodyDownData = "";
+    private String bodyDownData = "<div id=\"footerCopyright\"></div>";
 
     private int calculateScore(final List<ParticipantProblemInfo> problems, final StandingsConfig config) {
         int score = 0;
