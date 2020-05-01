@@ -9,6 +9,7 @@ table.standings {
 .standings th, .standings td {
     vertical-align: middle;
     border: solid black 1px;
+    min-width: 50px;
 }
 
 .standings .ok {
