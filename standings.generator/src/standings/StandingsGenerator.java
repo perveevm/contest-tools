@@ -195,7 +195,7 @@ public class StandingsGenerator {
 
         // Make title
         html.append("<tr>\n");
-        html.append("<th><div class=\"new-standings-cell\">Место</div></th>\n");
+        html.append("<th><div class=\"new-standings-cell\" valign=\"middle\">Место</div></th>\n");
         html.append("<th>Участник</th>\n");
 
         for (final Map.Entry<Integer, Problem> problemEntry : problems.entrySet()) {
@@ -344,9 +344,9 @@ public class StandingsGenerator {
             int upper = upperPlace.get(participant.getKey());
 
             if (lower != upper) {
-                cur.append(String.format("<td class=\"stat\"><div class=\"new-standings-cell\">%d-%d</div></td>\n", lowerPlace.get(participant.getKey()), upperPlace.get(participant.getKey())));
+                cur.append(String.format("<td class=\"stat\" valign=\"middle\"><div class=\"new-standings-cell\">%d-%d</div></td>\n", lowerPlace.get(participant.getKey()), upperPlace.get(participant.getKey())));
             } else {
-                cur.append(String.format("<td class=\"stat\"><div class=\"new-standings-cell\">%d</div></td>\n", lower));
+                cur.append(String.format("<td class=\"stat\" valign=\"middle\"><div class=\"new-standings-cell\">%d</div></td>\n", lower));
             }
             cur.append(String.format("<td>%s</td>", users.get(participant.getKey()))).append("\n");
 
