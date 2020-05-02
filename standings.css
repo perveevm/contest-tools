@@ -62,6 +62,10 @@ td {
     height: 30px;
 }
 
+th {
+    height: 30px;
+}
+
 .new-standings-cell {
     /*min-height: 30px;*/
     /*display: inline-block;*/
