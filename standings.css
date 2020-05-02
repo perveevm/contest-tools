@@ -7,7 +7,7 @@ table.new-standings {
 }
 
 .new-standings th, .new-standings td {
-    vertical-align: middle;
+    vertical-align: middle !important;
     border: solid black 1px;
     min-width: 50px;
 }
@@ -55,5 +55,5 @@ p.ejudge_copyright {
 
 .new-standings-cell {
     min-height: 30px;
-    vertical-align: center;
+    /*vertical-align: center;*/
 }
