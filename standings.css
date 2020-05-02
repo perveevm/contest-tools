@@ -55,4 +55,5 @@ p.ejudge_copyright {
 
 .new-standings-cell {
     min-height: 30px;
+    vertical-align: center;
 }
