@@ -52,3 +52,7 @@ p.ejudge_copyright {
     font-family: "Verdana","Arial";
     font-size: 10px;
 }
+
+.new-standings-cell {
+    min-height: 30px;
+}
