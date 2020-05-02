@@ -161,7 +161,7 @@ public class StandingsGenerator {
 
                     boolean needLastAC = config.needLastAC.contains(problems.get(problemID + 1).shortName);
 
-                    if (standings.get(userID).get(problemID).score < score || needLastAC) {
+                    if (standings.get(userID).get(problemID).score <= score || needLastAC) {
                         standings.get(userID).get(problemID).score = score;
                         standings.get(userID).get(problemID).lastRunTime = time;
 
