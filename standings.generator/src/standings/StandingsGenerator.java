@@ -267,6 +267,7 @@ public class StandingsGenerator {
         Map<Integer, Integer> lowerPlace = new HashMap<>();
         Map<Integer, Integer> upperPlace = new HashMap<>();
         Map<Integer, Integer> idPlace = new HashMap<>();
+        Set<Integer> solved = new HashSet<>();
 
         int l = 0;
         int curId = 0;
@@ -353,9 +354,8 @@ public class StandingsGenerator {
             int score = 0;
             int penalty = 0;
 
+            int problemID = 0;
             for (ParticipantProblemInfo participantProblemInfo : participant.getValue()) {
-//                cur.append("<td>");
-
                 if (config.standingsType == ContestType.IOI) {
                     if (participantProblemInfo.isSolved || participantProblemInfo.runsCount != 0) {
                         if (participantProblemInfo.isSolved) {
@@ -370,7 +370,11 @@ public class StandingsGenerator {
                     }
                 } else {
                     if (participantProblemInfo.isSolved) {
-                        cur.append("<td class=\"ok\">");
+                        if (!solved.contains(problemID)) {
+                            cur.append("<td class=\"firstAC\">");
+                        } else {
+                            cur.append("<td class=\"ok\">");
+                        }
                         cur.append("+");
 
                         if (participantProblemInfo.runsCount != 0) {
@@ -400,6 +404,7 @@ public class StandingsGenerator {
                 }
 
                 cur.append("</td>\n");
+                problemID++;
             }
 
             cur.append("<td class=\"stat\">").append(score).append("</td>\n");

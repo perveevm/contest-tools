@@ -18,6 +18,11 @@ table.new-standings {
     text-align: center;
 }
 
+.new-standings .firstAC {
+    background-color: rgb(176, 255, 176);
+    text-align: center;
+}
+
 .new-standings .rj {
     background-color: rgb(247, 94, 99);
     text-align: center;
