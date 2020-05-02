@@ -372,6 +372,7 @@ public class StandingsGenerator {
                     if (participantProblemInfo.isSolved) {
                         if (!solved.contains(problemID)) {
                             cur.append("<td class=\"firstAC\">");
+                            solved.add(problemID);
                         } else {
                             cur.append("<td class=\"ok\">");
                         }
