@@ -118,6 +118,8 @@ public class StandingsGenerator {
             }
         }
 
+        Set<Integer> solved = new HashSet<>();
+
         for (int i = 0; i < runNodes.getLength(); i++) {
             Element run = (Element) runNodes.item(i);
 
@@ -137,6 +139,11 @@ public class StandingsGenerator {
                     if (!standings.get(userID).get(problemID).isSolved || needLastAC) {
                         standings.get(userID).get(problemID).isSolved = true;
                         standings.get(userID).get(problemID).lastRunTime = time;
+
+                        if (!solved.contains(problemID)) {
+                            solved.add(problemID);
+                            standings.get(userID).get(problemID).isFirstAC = true;
+                        }
 
                         if (userVirtualStart.containsKey(userID)) {
                             standings.get(userID).get(problemID).lastRunTime -= userVirtualStart.get(userID);
@@ -267,7 +274,6 @@ public class StandingsGenerator {
         Map<Integer, Integer> lowerPlace = new HashMap<>();
         Map<Integer, Integer> upperPlace = new HashMap<>();
         Map<Integer, Integer> idPlace = new HashMap<>();
-        Set<Integer> solved = new HashSet<>();
 
         int l = 0;
         int curId = 0;
@@ -354,7 +360,6 @@ public class StandingsGenerator {
             int score = 0;
             int penalty = 0;
 
-            int problemID = 0;
             for (ParticipantProblemInfo participantProblemInfo : participant.getValue()) {
                 if (config.standingsType == ContestType.IOI) {
                     if (participantProblemInfo.isSolved || participantProblemInfo.runsCount != 0) {
@@ -370,12 +375,12 @@ public class StandingsGenerator {
                     }
                 } else {
                     if (participantProblemInfo.isSolved) {
-                        if (!solved.contains(problemID)) {
+                        if (participantProblemInfo.isFirstAC) {
                             cur.append("<td class=\"firstAC\">");
-                            solved.add(problemID);
                         } else {
                             cur.append("<td class=\"ok\">");
                         }
+
                         cur.append("+");
 
                         if (participantProblemInfo.runsCount != 0) {
@@ -405,7 +410,6 @@ public class StandingsGenerator {
                 }
 
                 cur.append("</td>\n");
-                problemID++;
             }
 
             cur.append("<td class=\"stat\">").append(score).append("</td>\n");
