@@ -389,7 +389,7 @@ public class StandingsGenerator {
 
                         score++;
                         int curPenalty = (participantProblemInfo.lastRunTime) / 60;
-                        penalty += curPenalty;
+                        penalty += curPenalty + participantProblemInfo.runsCount * 20;
 
                         int h = curPenalty / 60;
                         int m = curPenalty % 60;
