@@ -388,7 +388,7 @@ public class StandingsGenerator {
                         }
 
                         score++;
-                        int curPenalty = (participantProblemInfo.lastRunTime) / 60 + 20 * participantProblemInfo.runsCount;
+                        int curPenalty = (participantProblemInfo.lastRunTime) / 60;
                         penalty += curPenalty;
 
                         int h = curPenalty / 60;
@@ -399,7 +399,7 @@ public class StandingsGenerator {
                         cur.append("<td class=\"rj\">");
                         cur.append("-").append(participantProblemInfo.runsCount);
 
-                        int curPenalty = (participantProblemInfo.lastRunTime) / 60 + 20 * participantProblemInfo.runsCount;
+                        int curPenalty = (participantProblemInfo.lastRunTime) / 60;
                         int h = curPenalty / 60;
                         int m = curPenalty % 60;
 
