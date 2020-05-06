@@ -77,7 +77,7 @@ public class StandingsConfig {
             }
         }
         if (lastACNode.getLength() != 0) {
-            String lastAC = lastACNode.item(0).getTextContent().trim();
+            String lastAC = lastACNode.item(0).getTextContent();
             needLastAC.addAll(Arrays.asList(lastAC.split(",")));
         }
     }

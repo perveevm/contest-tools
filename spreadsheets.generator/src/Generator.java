@@ -1,5 +1,6 @@
 import password.MarkovChain;
 import password.MarkovPasswordGenerator;
+import password.PasswordGenerator;
 import password.RandomPasswordGenerator;
 import spreadsheet.SpreadsheetGenerator;
 
@@ -18,6 +19,26 @@ public class Generator {
             System.out.println("Using;");
             System.out.println("\t-h prints this message");
             System.out.println("\t-i inputFile -o outputFile [-e ejudgeOutputFile] [-l loginTemplate] [-p {random|markov}] [-pl passwordLen] [-s markovSourceFile] [-n nameTemplate columnNumberList] [-c if file has caption] [-sn sheetName]");
+            return;
+        }
+
+        if (args[0].equals("-rp")) {
+            if (args.length < 2) {
+                System.out.println("Too less arguments");
+                return;
+            }
+
+            String markovFile = args[1];
+            try (BufferedReader reader = new BufferedReader(new FileReader(markovFile))) {
+                Stream<String> lines = reader.lines();
+                String res = lines.collect(Collectors.joining());
+                MarkovChain chain = new MarkovChain(res.chars());
+                PasswordGenerator generator = new MarkovPasswordGenerator(chain);
+                System.out.println(generator.nextPassword(9));
+            } catch (IOException e) {
+                e.printStackTrace();
+                return;
+            }
             return;
         }
 
