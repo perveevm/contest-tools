@@ -147,17 +147,19 @@ public class StandingsGenerator {
 
                         if (!solved.contains(problemID)) {
                             solved.add(problemID);
-
-                            int curTime = time;
-                            if (userVirtualStart.containsKey(userID)) {
-                                curTime -= userVirtualStart.get(userID);
-                            }
-
-                            if (firstAC.get(problemID) > curTime) {
-                                firstAC.set(problemID, curTime);
-                            }
 //                            standings.get(userID).get(problemID).isFirstAC = true;
                         }
+
+                        // SET FIRST AC
+                        int curTime = time;
+                        if (userVirtualStart.containsKey(userID)) {
+                            curTime -= userVirtualStart.get(userID);
+                        }
+
+                        if (firstAC.get(problemID) > curTime) {
+                            firstAC.set(problemID, curTime);
+                        }
+                        // END OF SET FIRST AC
 
                         if (userVirtualStart.containsKey(userID)) {
                             standings.get(userID).get(problemID).lastRunTime -= userVirtualStart.get(userID);
