@@ -119,6 +119,11 @@ public class StandingsGenerator {
         }
 
         Set<Integer> solved = new HashSet<>();
+        List<Integer> firstAC = new ArrayList<>(problems.size());
+
+        for (int i = 0; i < problems.size(); i++) {
+            firstAC.set(i, (int)1e9);
+        }
 
         for (int i = 0; i < runNodes.getLength(); i++) {
             Element run = (Element) runNodes.item(i);
@@ -142,7 +147,11 @@ public class StandingsGenerator {
 
                         if (!solved.contains(problemID)) {
                             solved.add(problemID);
-                            standings.get(userID).get(problemID).isFirstAC = true;
+
+                            if (firstAC.get(problemID) > time) {
+                                firstAC.set(problemID, time);
+                            }
+//                            standings.get(userID).get(problemID).isFirstAC = true;
                         }
 
                         if (userVirtualStart.containsKey(userID)) {
@@ -193,6 +202,22 @@ public class StandingsGenerator {
                         }
                     }
                     break;
+                }
+            }
+        }
+
+        for (int i = 0; i < runNodes.getLength(); i++) {
+            Element run = (Element) runNodes.item(i);
+
+            Integer time = Integer.parseInt(run.getAttribute("time"));
+            String status = run.getAttribute("status");
+            Integer userID = Integer.parseInt(run.getAttribute("user_id"));
+
+            if (status.equals("OK")) {
+                int problemID = Integer.parseInt(run.getAttribute("prob_id")) - 1;
+
+                if (firstAC.get(problemID).equals(time)) {
+                    standings.get(userID).get(problemID).isFirstAC = true;
                 }
             }
         }
