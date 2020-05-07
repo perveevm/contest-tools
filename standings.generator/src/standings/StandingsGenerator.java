@@ -148,8 +148,13 @@ public class StandingsGenerator {
                         if (!solved.contains(problemID)) {
                             solved.add(problemID);
 
-                            if (firstAC.get(problemID) > time) {
-                                firstAC.set(problemID, time);
+                            int curTime = time;
+                            if (userVirtualStart.containsKey(userID)) {
+                                curTime -= userVirtualStart.get(userID);
+                            }
+
+                            if (firstAC.get(problemID) > curTime) {
+                                firstAC.set(problemID, curTime);
                             }
 //                            standings.get(userID).get(problemID).isFirstAC = true;
                         }
