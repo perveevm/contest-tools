@@ -220,8 +220,12 @@ public class StandingsGenerator {
 
             if (status.equals("OK")) {
                 int problemID = Integer.parseInt(run.getAttribute("prob_id")) - 1;
+                int curTime = time;
+                if (userVirtualStart.containsKey(userID)) {
+                    curTime -= userVirtualStart.get(userID);
+                }
 
-                if (firstAC.get(problemID).equals(time)) {
+                if (firstAC.get(problemID).equals(curTime)) {
                     standings.get(userID).get(problemID).isFirstAC = true;
                 }
             }
