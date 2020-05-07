@@ -119,11 +119,11 @@ public class StandingsGenerator {
         }
 
         Set<Integer> solved = new HashSet<>();
-        List<Integer> firstAC = new ArrayList<>(problems.size());
+        List<Integer> firstAC = new ArrayList<>(Collections.nCopies(problems.size(), (int)1e9));
 
-        for (int i = 0; i < problems.size(); i++) {
-            firstAC.set(i, (int)1e9);
-        }
+//        for (int i = 0; i < problems.size(); i++) {
+//            firstAC.set(i, (int)1e9);
+//        }
 
         for (int i = 0; i < runNodes.getLength(); i++) {
             Element run = (Element) runNodes.item(i);
